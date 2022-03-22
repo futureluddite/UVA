@@ -1,0 +1,313 @@
+/* CSS */
+/*
+Notes:
+ * .qs-page-container-desktop is a high-level class applied to desktop styling. I'm not trying to style mobile, too much customization.
+
+TODOs:
+ * Remove over-use of !important
+ * Figure out right padding on scroll bar hover
+ * Figure out why the page is a little longer than default
+ * Make sure our targetting is more highly-aligned with Qlik's CSS
+ * Make the fade-in/fade-out top and bottom scrollable areas look better
+ * Create better Color Palettes
+ * Don't override light text :/
+
+Debatable Choices:
+ * Added :not(.qv-mode-edit) to most everything to hide styling from the editor view
+ * Hide ugly expand menu in favor of single three dot menu
+
+*/
+
+/* Properties/Variables */
+:root
+{
+    --logo:               url("https://qsensedev.admin.virginia.edu/appcontent/0b9eaff1-324f-424b-9e5f-c5559169c29d/UBIE_2.png");
+    
+    --text-dark:          hsla(225,  50%,  11%, 1);
+    --text-light:         white; 
+    
+    --uva-orange-dark:    hsla( 30, 100%,  37%, 1);
+    --uva-orange:         hsla( 30, 100%,  45%, 1);
+    --uva-orange-light:   hsla( 30, 100%,  53%, 1);
+    --uva-orange-vlight:  hsla( 30, 100%,  77%, 1);
+    
+    --uva-navy:           hsla(225,  36%,  22%, 1);
+    --uva-navy-light:     hsla(228,  28%,  47%, 1);
+    --uva-navy-vlight:    hsla(228,  21%,  74%, 1);
+    --uva-navy-vvlight:   hsla(228,  14%,  87%, 1);
+    
+    --grey:               hsla(  0,   0%,  50%, 1);
+    --grey-light:         hsla(  0,   0%,  75%, 1);
+    --grey-vlight:        hsla(  0,   0%,  90%, 1);
+    --grey-trans:         hsla(  0,   0%,  50%, 50%);
+    --grey-vtrans:        hsla(  0,   0%,  50%, 25%);
+}
+
+/* Background between elements */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-sheet
+{
+    background-color:     var(--uva-navy-vvlight);
+    border-top:           1px solid var(--uva-navy);
+}
+
+/* Visualization Containers */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-gridcell:not(.qv-gridcell-empty),
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-container
+{
+    overflow:             hidden;
+    border-radius:        7px;
+    border:               1px solid var(--uva-navy-light) !important;
+    box-shadow:           unset;
+    transition:           all .5s ease-in-out;
+    background-color:     white;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-gridcell:hover:not(.qv-gridcell-empty),
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-container:hover
+{
+    border:               1px solid var(--uva-navy) !important;
+    box-shadow:           0 0 5px var(--uva-orange);
+}
+
+/* Text size */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .responsive-text,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .responsive-text font
+{
+    font-size:            calc(11px + .25vw) !important;
+}
+
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .qv-object-header,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-header
+{
+    padding-bottom:       0px !important;
+}
+
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .qv-object-title-text
+{
+    font-size:            calc(13px + .2vw) !important;
+}
+
+/* Text & Image Object scrolling */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .responsive-text
+{
+    overflow-y:           hidden !important;
+    padding-right:        15px !important; /*for scrollbar space */
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .responsive-text:hover
+{
+    overflow-y:           auto !important;
+    padding-right:        5px !important;
+}
+/* Add gradient to scrollable area bottom */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .media-tool-scrollbar::after,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .media-tool-scrollbar::before
+{
+    content:              '';
+    position:             absolute;
+    width:                calc(100% - 15px);
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .media-tool-scrollbar::before
+{
+    top:                  0;
+    background:           linear-gradient(white, rgba(255, 255, 255, 0.001)); /* transparent keyword is broken in Safari */
+    height:               min(25px, 4%);
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .media-tool-scrollbar::after
+{
+    bottom:               0;
+    background:           linear-gradient(rgba(255, 255, 255, 0.001), white); /* transparent keyword is broken in Safari */
+    height:               25px;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-text-image .responsive-text
+{
+    padding-top:          min(25px, 4%);
+    padding-bottom:       min(25px, 4%);
+}
+
+/* Scrollbar Stuff */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-gridcell ::-webkit-scrollbar,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .scrollbar-track
+{
+    width:                10px !important;
+    height:               10px !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-gridcell ::-webkit-scrollbar-thumb,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .scrollbar-track.fade .scrollbar-thumb
+{
+    background:           var(--grey-vtrans) !important; 
+    border-radius:        5px !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-gridcell ::-webkit-scrollbar-thumb:hover,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .scrollbar-track.fade .scrollbar-thumb.active
+{
+    background:           var(--grey-trans) !important;
+}
+
+/* font color */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-title-text,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-listbox-text,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .responsive-text font,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-text,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable *
+{
+    color:                var(--text-dark);
+}
+
+/* Style sheet Title object and text */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-container
+{
+    margin-left:          7px;
+    margin-right:         7px;
+    margin-top:           7px;
+    background:           linear-gradient(90deg, white 0%, var(--uva-orange) 100%) !important;                                       /* Consistent with legacy Theme*/
+    /*background:           linear-gradient(90deg, white 67%, var(--uva-orange) 100%) !important;                                      /* Delay start of the orange gradient */
+    /*background:           linear-gradient(90deg, var(--uva-navy-light) 0%, white 33%, white 67%, var(--uva-orange) 100%) !important; /* Navy to White to Orange */
+    /*background:           linear-gradient(90deg, var(--uva-orange) 0%, white 33%, white 67%, var(--uva-orange) 100%) !important;     /* Orange to White to Orange */
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) #sheet-title
+{
+    background-image:     var(--logo) !important;
+    background-position:  100% !important;
+    background-repeat:    no-repeat !important;
+    background-size:      auto 67% !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-container .sheet-title-logo-img
+{
+    display:              none !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qvt-visualization-title
+{
+    padding-left:         7px !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .sheet-title-container *
+{
+    text-align:           center !important;
+    font-weight:          bold;
+}
+
+/* Change highlight colors of top toolbar to match page look & feel */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qs-toolbar * 
+{
+    color:                var(--text-dark) !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qs-toolbar .lui-button--success *
+{
+    color:                var(--text-light) !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .lui-button.lui-active, 
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .lui-button:active
+{
+    background-color:     var(--uva-navy-vvlight) !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qs-app-info-toggle .lui-icon 
+{
+    display:              none;
+}
+
+/* Make weird blue button highlighting orange */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .lui-button.lui-focused, 
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .lui-button:focus
+{
+    border:               1px solid var(--grey-light);
+    box-shadow:           0 0 1px 1px var(--uva-orange);
+    transition:           none;
+}
+
+/* Modify Variable Sheet object to allow Horizontal scroll */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .bootstrap
+{
+    display:              inline-block;
+    white-space:          nowrap;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-content
+{
+    overflow-x:           scroll;
+    overflow-y:           hidden;
+    padding-left:         15px;
+    padding-right:        15px;
+    width:                calc(100% - 30px);
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-content-container::before,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-content-container::after
+{
+    content:              '';
+    position:             absolute;
+    height:               calc(100% - 15px);
+    width:                15px;
+    z-index:              1;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-content-container::before
+{
+    left:                 0;
+    background:           linear-gradient(90deg, white, rgba(255, 255, 255, 0.001)); /* transparent keyword is broken in Safari */
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable .qv-object-content-container::after
+{
+    right:                0;
+    background:           linear-gradient(90deg, rgba(255, 255, 255, 0.001), white); /* transparent keyword is broken in Safari */
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-variable button
+{
+    padding:              15px 10px 15px 10px !important;
+    height:               30px !important;
+    line-height:          0px  !important;
+}
+
+/* Center Navigation Links in Sheet object */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-swr-sense-navigation .qv-object-content
+{
+    position:             relative;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-swr-sense-navigation .qv-object-content>.container
+{
+    position:             absolute;
+    top:                  calc(50% - 5px);
+    left:                 50%;
+    transform:            translate(-50%,-50%);
+}
+
+
+/* To comment */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object
+{
+    padding:              7px;
+    padding-bottom:       0px;
+}
+
+/* Minimalist Sheet Object Menus */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-nav
+{
+    /*margin-top:         -30px;*/
+    margin:               0px  !important;
+    bottom:               0px  !important;
+    right:                0px  !important;
+    height:               0px  !important;
+    width:                0px  !important;
+    top:                  0px  !important;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-nav .lui-icon
+{
+    border:               none !important;
+    background:           none !important;
+    padding:              0px  !important;
+    padding-right:        3px  !important;
+    color:                var(--grey);
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-nav .lui-icon--expand,
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-nav .lui-icon--more.big
+{
+    display:              none;
+}
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) .qv-object-header>.ng-hide:not(.ng-hide-animate)
+{
+    display:              inline !important;
+    height:               10px;
+}
+
+/* More style-consistent expand */
+.qs-page-container-desktop .qv-panel:not(.qv-mode-edit) #grid .qv-gridcell.zoom 
+{
+	height:               calc(100% - 5px) !important;
+    top:                  2.5px !important;
+    left:                 2.5px !important;
+    width:                calc(100% - 5px) !important;
+}
